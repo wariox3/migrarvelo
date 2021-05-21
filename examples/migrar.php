@@ -2,7 +2,7 @@
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', true);
 
-require_once __DIR__.'/src/SimpleXLSX.php';
+require_once __DIR__.'/../src/SimpleXLSX.php';
 
 $ruta = "/home/desarrollo/Escritorio/importar.xlsx";
 if ( $xlsx = SimpleXLSX::parse( $ruta ) ) {
