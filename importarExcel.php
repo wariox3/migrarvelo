@@ -3,18 +3,22 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', true);
 
 require_once __DIR__.'/src/SimpleXLSX.php';
-
-$ruta = "/home/desarrollo/Escritorio/importar.xlsx";
+include 'conexion.php';
+$mysql = new manejadorMySql();
+set_time_limit(0);
+ini_set("memory_limit", -1);
+$ruta = "/home/desarrollo/Escritorio/importarCompleto.xlsx";
 if ( $xlsx = SimpleXLSX::parse( $ruta ) ) {
     $dim = $xlsx->dimension();
     $cols = $dim[0];
     foreach ( $xlsx->rows() as $k => $r ) {
-        echo $r[0] . "<br/>";
-//        for ( $i = 0; $i < $cols; $i ++ ) {
-//            echo '<td>' . ( isset( $r[ $i ] ) ? $r[ $i ] : '&nbsp;' ) . '</td>';
-//        }
-    }
+        $numeroIdentificacion = $r[4];
+        $sql = "INSERT INTO temporal (doccliente)
+                            VALUES ('{$numeroIdentificacion}')";
+        if($insertar = $mysql->insertar($sql)) {
 
+        }
+    }
 } else {
     echo SimpleXLSX::parseError();
 }

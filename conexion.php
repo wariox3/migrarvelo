@@ -1,10 +1,10 @@
 <?php
 
 class manejadorMySql{
-    private $host   ="192.168.2.91";
-    private $usuario="administrador";
-    private $clave  ="seracis2020";
-    private $db     ="bdseracis";
+    private $host   ="localhost";
+    private $usuario="root";
+    private $clave  ="70143086";
+    private $db     ="bdmigrarvelo";
     public $conexion;
     public function __construct() {
         $this->conexion = new mysqli($this->host, $this->usuario, $this->clave,$this->db);
