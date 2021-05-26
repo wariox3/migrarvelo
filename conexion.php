@@ -32,6 +32,10 @@ class manejadorMySql{
         $resultado = $this->conexion->query($sql) or die($this->conexion->error);
         return $resultado;
     }
+    public function consulta3($sql){
+        $resultado = mysqli_query($this->conexion, $sql);
+        return $resultado;
+    }
     //INSERTAR
     public function insertar($sql){
         $resultado = mysqli_query($this->conexion, $sql);
