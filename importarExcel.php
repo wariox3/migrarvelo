@@ -24,10 +24,11 @@ if ( $xlsx = SimpleXLSX::parse( $ruta ) ) {
             $sql = "INSERT INTO temporal (fecha_registro, estadoGuia, numero_guia, anexo, doccliente, nomcliente, direccion_recogida,
                                 centro_costo_cl_envia, centro_logistico_envia, ciudadRemitente, dane_ciudad_remitente, documento_destinatario, detalle_destinatario,    
                                 direccion_destinatario, centrocosto_cl_recibe, centro_logistico_recibe, ciudadDestinatario, dane_ciudad_destinatario, formaPago,
-                                unidades, PesoReal, PesoFacturado, valor_declarado, valor_manejo, otros_cobros, valor_total, fecha_entregado, fecha_cumplido, fecha_facturado)
+                                unidades, PesoReal, PesoFacturado, valor_declarado, valor_manejo, otros_cobros, valor_total, fecha_entregado, fecha_cumplido, fecha_facturado,
+                                vr_flete, telefono_destinatario)
                             VALUES ('{$r[0]}','{$r[1]}','{$r[2]}','{$anexo}','{$r[4]}','{$nomcliente}','{$r[6]}','{$r[7]}','{$r[8]}','{$r[9]}','{$r[10]}','{$r[11]}','{$detalle_destinatario}',
                                     '{$r[13]}','{$r[14]}','{$r[15]}','{$r[16]}','{$r[17]}','{$r[18]}','{$r[19]}','{$r[20]}','{$r[21]}','{$r[22]}','{$r[23]}','{$otros_cobros}','{$r[25]}','{$r[26]}'
-                                    ,'{$r[27]}','{$r[28]}')";
+                                    ,'{$r[27]}','{$r[28]}','{$r[30]}','{$r[31]}')";
             if($insertar = $mysql->insertar($sql)) {
 
             }

@@ -9,9 +9,9 @@ $mysqlDestino = new manejadorMySqlDestino();
 $utilidades = new utilidades();
 set_time_limit(0);
 ini_set("memory_limit", -1);
-$arGuias = $mysql->consulta3("SELECT * FROM temporal limit 100000");
+$arGuias = $mysql->consulta3("SELECT * FROM temporal");
 if (mysqli_num_rows($arGuias) > 0) {
-    $codigoGuia = 1;
+    $codigoGuia = 1000000;
     while($fila = mysqli_fetch_assoc($arGuias)){
         $codigoGuiaTipoFk = $utilidades->tipoGuia($fila["formaPago"]);
         $codigoOperacionIngresoFk = $utilidades->operacion($fila["centro_costo_cl_envia"]);
@@ -26,16 +26,16 @@ if (mysqli_num_rows($arGuias) > 0) {
         if($codigoTerceroFk && $codigoCiudadOrigenFk && $codigoCiudadDestinoFk) {
             $sql = "INSERT INTO tte_guia (codigo_guia_pk, codigo_guia_tipo_fk, codigo_operacion_ingreso_fk, codigo_operacion_cargo_fk, codigo_tercero_fk, codigo_ciudad_origen_fk, 
                       codigo_ciudad_destino_fk, numero, documento_cliente, remitente, nombre_remitente, direccion_remitente,
-                      nombre_destinatario, direccion_destinatario, fecha_ingreso, fecha_entrega,
-                      fecha_cumplido, fecha_factura, unidades, peso_real, peso_volumen, peso_facturado, 
-                      vr_declara, vr_flete, vr_manejo, estado_autorizado, estado_aprobado, estado_entregado, estado_facturado, estado_cumplido, estado_soporte, 
-                      seguimiento)
-                            VALUES ({$codigoGuia}, '{$codigoGuiaTipoFk}', '{$codigoOperacionIngresoFk}', '{$codigoOperacionCargoFk}', {$codigoTerceroFk}, {$codigoCiudadOrigenFk},
-                                    {$codigoCiudadDestinoFk}, {$codigoGuia}, '{$fila["anexo"]}', '{$fila["nomcliente"]}', '{$fila["nomcliente"]}', '{$fila["direccion_recogida"]}',
-                                    '{$fila["detalle_destinatario"]}','{$fila["direccion_destinatario"]}', {$utilidades->fecha($fila["fecha_registro"])}, {$utilidades->fecha($fila["fecha_entregado"])},
-                                    {$utilidades->fecha($fila["fecha_cumplido"])}, {$utilidades->fecha($fila["fecha_facturado"])}, {$fila["unidades"]}, {$fila["PesoReal"]}, {$fila["PesoReal"]}, {$fila["PesoFacturado"]}, 
-                                    {$fila["valor_declarado"]}, 0, {$fila["valor_manejo"]}, 1, 1, {$estadoEntregado}, {$estadoFacturado}, {$estadoCumplido}, {$estadoSoporte},
-                                    '{$fila["numero_guia"]}')";
+                      nombre_destinatario, direccion_destinatario, telefono_destinatario, fecha_ingreso, fecha_entrega,
+                      fecha_cumplido, unidades, peso_real, peso_volumen, peso_facturado, 
+                      vr_declara, vr_flete, vr_manejo, estado_autorizado, estado_aprobado, estado_entregado, estado_cumplido, estado_soporte, 
+                      comentario, codigo_servicio_fk, estado_factura_generada, estado_facturado, estado_embarcado, estado_despachado, estado_impreso)
+                            VALUES ({$codigoGuia}, '{$codigoGuiaTipoFk}', '{$codigoOperacionIngresoFk}', '{$codigoOperacionIngresoFk}', {$codigoTerceroFk}, {$codigoCiudadOrigenFk},
+                                    {$codigoCiudadDestinoFk}, {$codigoGuia}, '{$fila["numero_guia"]}', '{$fila["nomcliente"]}', '{$fila["nomcliente"]}', '{$fila["direccion_recogida"]}',
+                                    '{$fila["detalle_destinatario"]}','{$fila["direccion_destinatario"]}','{$fila["telefono_destinatario"]}', {$utilidades->fecha($fila["fecha_registro"])}, {$utilidades->fecha($fila["fecha_entregado"])},
+                                    {$utilidades->fecha($fila["fecha_cumplido"])}, {$fila["unidades"]}, {$fila["PesoReal"]}, {$fila["PesoReal"]}, {$fila["PesoFacturado"]}, 
+                                    {$fila["valor_declarado"]}, {$fila["vr_flete"]}, {$fila["valor_manejo"]}, 1, 1, {$estadoEntregado}, {$estadoCumplido}, {$estadoSoporte},
+                                    '{$fila["anexo"]}', 'PAQ', 1, 1, 1, 1, 1)";
             if($insertar = $mysqlDestino->insertar($sql)) {
 
             }
